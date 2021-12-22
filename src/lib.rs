@@ -43,7 +43,7 @@ impl BrainfuckFile {
                 ',' => continue,
                 '[' => squarebracket_index = i,
                 ']' => {
-                    if squarebracket_index != 0 {
+                    if cell_array[cell_pointer] != 0 {
                         i = squarebracket_index
                     }
                 }
