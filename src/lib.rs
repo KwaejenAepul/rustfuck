@@ -30,25 +30,32 @@ impl BrainfuckFile {
     }
     pub fn interpert_bf(char_vec: &Vec<char>) {
         let mut i: usize = 0;
-        let mut cell_array = [0; 30000];
+        let mut cell_array = [0u8; 30000];
         let mut cell_pointer: usize = 0;
-        let mut squarebracket_index: usize = 0;
+        let mut squarebracket_index_vec: Vec<u32> = vec![];
         while i < char_vec.len() {
+            println!("{} {:?}", i, char_vec[i]);
             match char_vec[i] {
                 '>' => cell_pointer = cell_pointer + 1,
                 '<' => cell_pointer = cell_pointer - 1,
                 '+' => cell_array[cell_pointer] = cell_array[cell_pointer] + 1,
                 '-' => cell_array[cell_pointer] = cell_array[cell_pointer] - 1,
-                '.' => continue,
+                '.' => println!("{:?}", cell_array[i].make_ascii_lowercase()),
                 ',' => continue,
-                '[' => squarebracket_index = i,
+                '[' => squarebracket_index_vec.push(i as u32),
                 ']' => {
                     if cell_array[cell_pointer] != 0 {
-                        i = squarebracket_index
+                        if squarebracket_index_vec.len() == 0{
+                            panic!("\nno start of loop \nerror at character index: {}", i);
+                        }
+                        i = squarebracket_index_vec[squarebracket_index_vec.len() - 1] as usize
+                    }else {
+                        squarebracket_index_vec.pop();
                     }
                 }
                 _ => continue,
             };
+            i = i +1;
         }
     }
 }
