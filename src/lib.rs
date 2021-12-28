@@ -34,13 +34,12 @@ impl BrainfuckFile {
         let mut cell_pointer: usize = 0;
         let mut squarebracket_index_vec: Vec<u32> = vec![];
         while i < char_vec.len() {
-            println!("{} {:?}", i, char_vec[i]);
             match char_vec[i] {
                 '>' => cell_pointer = cell_pointer + 1,
                 '<' => cell_pointer = cell_pointer - 1,
                 '+' => cell_array[cell_pointer] = cell_array[cell_pointer] + 1,
                 '-' => cell_array[cell_pointer] = cell_array[cell_pointer] - 1,
-                '.' => println!("{:?}", cell_array[i].make_ascii_lowercase()),
+                '.' => {println!("{:?}", cell_array[i])},
                 ',' => continue,
                 '[' => squarebracket_index_vec.push(i as u32),
                 ']' => {
