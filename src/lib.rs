@@ -1,9 +1,7 @@
-use std::{env, fs};
+use std::{env, fs, io};
 /*
 needs:  - input
-        - output
-        - print
-        - loop
+        - output to ascii
 */
 
 pub fn read_file(mut args: env::Args) -> String {
@@ -40,6 +38,13 @@ pub fn interpert_bf(bf: String) {
                 i += 1;
             }
             ',' => {
+                let mut input = String::new();
+                println!("interger pls");
+                io::stdin()
+                    .read_line(&mut input)
+                    .expect("failed to read line");
+                let input: u32 = input.trim().parse().unwrap();
+                data_cell_array[cursor] = input;
                 i += 1;
             }
             '[' => {
