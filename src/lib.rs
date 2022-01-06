@@ -1,7 +1,6 @@
 use std::{env, fs, io};
 /*
-needs:  - input
-        - output to ascii
+needs: - output to ascii
 */
 
 pub fn read_file(mut args: env::Args) -> String {
