@@ -9,8 +9,9 @@ pub fn read_file(mut args: env::Args) -> String {
     let contents = fs::read_to_string(file).unwrap();
     contents
 }
+
 pub fn interpert_bf(bf: String) {
-    let mut data_cell_array = [0u32; 30000];
+    let mut data_cell_array = [0u8; 30000];
     let mut cursor: usize = 0;
     let mut i = 0;
     let mut loops_vec: Vec<u8> = Vec::new();
@@ -33,7 +34,7 @@ pub fn interpert_bf(bf: String) {
                 i += 1;
             }
             '.' => {
-                println!("{}", data_cell_array[cursor]);
+                print!("{}", data_cell_array[cursor] as char);
                 i += 1;
             }
             ',' => {
@@ -42,14 +43,14 @@ pub fn interpert_bf(bf: String) {
                 io::stdin()
                     .read_line(&mut input)
                     .expect("failed to read line");
-                let input: u32 = input.trim().parse().unwrap();
+                let input: u8 = input.trim().parse().unwrap();
                 data_cell_array[cursor] = input;
                 i += 1;
             }
             '[' => {
-                if loops_vec.contains(&(i as u8)){
+                if loops_vec.contains(&(i as u8)) {
                     i += 1;
-                }else{
+                } else {
                     loops_vec.push(i as u8);
                     i += 1;
                 }
@@ -58,10 +59,10 @@ pub fn interpert_bf(bf: String) {
                 if data_cell_array[cursor] != 0 {
                     if loops_vec.len() == 0 {
                         panic!("\nno start of loop \nerror at character index: {}", i);
-                    }else{
+                    } else {
                         i = loops_vec[loops_vec.len() - 1] as usize
                     }
-                }else {
+                } else {
                     loops_vec.pop();
                     i += 1;
                 }
