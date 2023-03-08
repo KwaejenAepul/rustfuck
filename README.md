@@ -1,2 +1,2 @@
 # rustfuck
-brainfuck "interperter" WIP
+brainfuck "interperter"
